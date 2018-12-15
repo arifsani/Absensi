@@ -61,6 +61,7 @@
             android:drawableLeft="@drawable/logouser"
             android:drawablePadding="10dp"
             android:fontFamily="@font/neosanslight"
+            android:inputType="textNoSuggestions"
             android:hint="Username" />
     </android.support.design.widget.TextInputLayout>
 
@@ -85,6 +86,7 @@
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/logopassword"
             android:drawablePadding="10dp"
+            android:inputType="textNoSuggestions"
             android:fontFamily="@font/neosanslight"
             android:hint="Password" />
         />

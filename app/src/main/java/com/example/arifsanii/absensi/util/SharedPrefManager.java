@@ -2,6 +2,9 @@ package com.example.arifsanii.absensi.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 
 public class SharedPrefManager {
@@ -13,9 +16,13 @@ public class SharedPrefManager {
 
     SharedPreferences sp;
     SharedPreferences.Editor spEditor;
+    Context _context;
+
+    int PRIVATE_MODE = 0;
 
     public SharedPrefManager(Context context){
-        sp = context.getSharedPreferences(SP_MAHASISWA_APP, Context.MODE_PRIVATE);
+        this._context = context;
+        sp = _context.getSharedPreferences(SP_MAHASISWA_APP, PRIVATE_MODE);
         spEditor = sp.edit();
     }
 
@@ -34,6 +41,14 @@ public class SharedPrefManager {
         spEditor.commit();
     }
 
+    public void setLogin(boolean getSPSudahLogin){
+        spEditor.putBoolean(SP_SUDAH_LOGIN,getSPSudahLogin);
+        spEditor.clear();
+        spEditor.commit();
+        Log.d(TAG,"session modified ");
+
+    }
+
     public String getSPNama(){
         return sp.getString(SP_NAMA, "");
     }
@@ -43,6 +58,7 @@ public class SharedPrefManager {
     }
 
     public Boolean getSPSudahLogin(){
+
         return sp.getBoolean(SP_SUDAH_LOGIN, false);
     }
 }
