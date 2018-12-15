@@ -1,4 +1,4 @@
-package com.example.arifsanii.absensi;
+package com.example.arifsanii.absensi.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

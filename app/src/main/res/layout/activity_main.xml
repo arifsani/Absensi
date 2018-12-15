@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/putihbackground"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -97,8 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputlayout2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/mybutton"
         android:fontFamily="@font/neosansmed"
         android:text="Log in"
