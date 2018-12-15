@@ -3,6 +3,7 @@ package com.example.arifsanii.absensi.activity;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,14 +13,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.arifsanii.absensi.R;
 import com.example.arifsanii.absensi.util.SharedPrefManager;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private SharedPrefManager sharedPrefManager;
 
-    SharedPrefManager sharedPrefManager;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -38,6 +42,14 @@ public class Main2Activity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        sharedPrefManager = new SharedPrefManager(getApplicationContext());
+
+        if (!sharedPrefManager.getSPSudahLogin()) {
+            sharedPrefManager.setLogin(false);
+            Intent intent = new Intent(Main2Activity.this,MainActivity.class);
+            startActivity(intent);
+        }
 
     }
 
@@ -67,6 +79,10 @@ public class Main2Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id == R.id.nav_settings){
+            Toast.makeText(Main2Activity.this,"Maintenance",Toast.LENGTH_SHORT).show();
+        }
+
         if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_signout) {
@@ -80,8 +96,6 @@ public class Main2Activity extends AppCompatActivity
 
     private void showAlertDialog() {
 
-        sharedPrefManager = new SharedPrefManager(this);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("Sing Out ?")
                 .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
@@ -92,9 +106,9 @@ public class Main2Activity extends AppCompatActivity
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN,false);
-                        startActivity(new Intent(Main2Activity.this, MainActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        sharedPrefManager.setLogin(false);
+                        Intent intent = new Intent(Main2Activity.this,MainActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 });

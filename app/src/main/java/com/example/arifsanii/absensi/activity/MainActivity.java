@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
                                     // Jika login berhasil maka data nama yang ada di response API
                                     // akan diparsing ke activity selanjutnya.
                                     Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
-                                    String nama = jsonRESULTS.getJSONObject("users").getString("name");
-                                    String email = jsonRESULTS.getJSONObject("users").getString("email");
-                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NAMA, nama);
+                                    String name = jsonRESULTS.getJSONObject("user").getString("name");
+                                    String email = jsonRESULTS.getJSONObject("user").getString("email");
+                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NAMA, name);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_EMAIL,email);
                                     // Shared Pref ini berfungsi untuk menjadi trigger session login
                                     sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
