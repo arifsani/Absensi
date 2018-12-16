@@ -1,9 +1,7 @@
 package com.example.arifsanii.absensi.activity;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,19 +11,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.arifsanii.absensi.R;
 import com.example.arifsanii.absensi.util.SharedPrefManager;
 
-import static android.widget.Toast.LENGTH_SHORT;
-
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private SharedPrefManager sharedPrefManager;
+     SharedPrefManager sharedPrefManager;
 
-
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +35,16 @@ public class Main2Activity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        sharedPrefManager = new SharedPrefManager(this);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headView = navigationView.getHeaderView(0);
+        TextView textName = headView.findViewById(R.id.textName);
+        textName.setText(sharedPrefManager.getSPNama());
+        TextView textEmail = headView.findViewById(R.id.textEmail);
+        textEmail.setText(sharedPrefManager.getSPEmail());
 
-        sharedPrefManager = new SharedPrefManager(getApplicationContext());
 
         if (!sharedPrefManager.getSPSudahLogin()) {
             sharedPrefManager.setLogin(false);
@@ -60,6 +61,7 @@ public class Main2Activity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            this.finish();
         }
     }
 
@@ -80,7 +82,10 @@ public class Main2Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_settings){
-            Toast.makeText(Main2Activity.this,"Maintenance",Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setMessage("Maintenance");
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
         if (id == R.id.nav_settings) {
@@ -106,13 +111,16 @@ public class Main2Activity extends AppCompatActivity
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        sharedPrefManager.setLogin(false);
-                        Intent intent = new Intent(Main2Activity.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        logoutUser();
                     }
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    private void logoutUser(){
+        sharedPrefManager.setLogin(false);
+        Intent intent = new Intent(Main2Activity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

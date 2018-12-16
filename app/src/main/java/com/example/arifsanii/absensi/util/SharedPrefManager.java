@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class SharedPrefManager {
 
     public static final String SP_MAHASISWA_APP = "spMahasiswaApp";
     public static final String SP_NAMA = "spNama";
+    public static final String SP_NIM = "spNim";
     public static final String SP_EMAIL = "spEmail";
     public static final String SP_SUDAH_LOGIN = "spSudahLogin";
 
@@ -53,6 +55,10 @@ public class SharedPrefManager {
         return sp.getString(SP_NAMA, "");
     }
 
+    public String getSPNim(){
+        return sp.getString(SP_NIM,"");
+    }
+
     public String getSPEmail(){
         return sp.getString(SP_EMAIL, "");
     }
@@ -61,4 +67,5 @@ public class SharedPrefManager {
 
         return sp.getBoolean(SP_SUDAH_LOGIN, false);
     }
+
 }

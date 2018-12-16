@@ -3,12 +3,15 @@ package com.example.arifsanii.absensi.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.arifsanii.absensi.R;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         user = findViewById(R.id.user);
         pass = findViewById(R.id.pass);
+        pass.setTypeface(Typeface.MONOSPACE);
         btn_login = findViewById(R.id.btn_login);
         mContext = this;
         mApiService = UtilsApi.getAPIService(); // meng-init yang ada di package apihelper
@@ -61,8 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
+        else sharedPrefManager.setLogin(false);
 
     }
+
+
     private void requestLogin(){
         mApiService.loginRequest(user.getText().toString(), pass.getText().toString())
                 .enqueue(new Callback<ResponseBody>() {
@@ -77,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
                                     // akan diparsing ke activity selanjutnya.
                                     Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
                                     String name = jsonRESULTS.getJSONObject("user").getString("name");
+                                    String nim = jsonRESULTS.getJSONObject("user").getString("nim");
                                     String email = jsonRESULTS.getJSONObject("user").getString("email");
-                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NAMA, name);
+                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NIM,nim);
+                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NAMA,name);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_EMAIL,email);
                                     // Shared Pref ini berfungsi untuk menjadi trigger session login
                                     sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
@@ -109,4 +118,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+        }
+        return super.onKeyDown(keycode, event);
+    }
+
 }

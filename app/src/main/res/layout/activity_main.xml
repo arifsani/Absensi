@@ -60,8 +60,8 @@
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/logouser"
             android:drawablePadding="10dp"
-            android:fontFamily="@font/neosanslight"
-            android:inputType="textNoSuggestions"
+            android:fontFamily="monospace"
+            android:inputType="number"
             android:hint="Username" />
     </android.support.design.widget.TextInputLayout>
 
@@ -75,7 +75,8 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:textColorHint="@color/ijofont"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        tools:ignore="ExtraText">
 
         <EditText
             android:id="@+id/pass"
@@ -86,8 +87,8 @@
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/logopassword"
             android:drawablePadding="10dp"
-            android:inputType="textNoSuggestions"
-            android:fontFamily="@font/neosanslight"
+            android:inputType="textPassword"
+            android:fontFamily="@font/neosansmed"
             android:hint="Password" />
         />
     </android.support.design.widget.TextInputLayout>
