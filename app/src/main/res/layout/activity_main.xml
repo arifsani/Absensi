@@ -34,7 +34,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/neosansbold"
+        android:fontFamily="@font/neosansmed"
         android:text="Log in"
         android:textColor="@color/ijofont"
         android:textSize="15pt" />
@@ -60,7 +60,7 @@
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/logouser"
             android:drawablePadding="10dp"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/neosanslight"
             android:inputType="number"
             android:hint="Username" />
     </android.support.design.widget.TextInputLayout>
@@ -87,8 +87,8 @@
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/logopassword"
             android:drawablePadding="10dp"
-            android:inputType="textPassword"
-            android:fontFamily="@font/neosansmed"
+            android:fontFamily="@font/neosanslight"
+            android:inputType="textNoSuggestions"
             android:hint="Password" />
         />
     </android.support.design.widget.TextInputLayout>
