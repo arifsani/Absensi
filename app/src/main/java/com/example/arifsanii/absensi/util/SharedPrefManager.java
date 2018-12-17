@@ -12,8 +12,8 @@ public class SharedPrefManager {
 
     public static final String SP_MAHASISWA_APP = "spMahasiswaApp";
     public static final String SP_NAMA = "spNama";
-    public static final String SP_NIM = "spNim";
-    public static final String SP_EMAIL = "spEmail";
+    public static final String SP_NIP = "spNip";
+    public static final String SP_TELP = "spTelp";
     public static final String SP_SUDAH_LOGIN = "spSudahLogin";
 
     SharedPreferences sp;
@@ -55,12 +55,12 @@ public class SharedPrefManager {
         return sp.getString(SP_NAMA, "");
     }
 
-    public String getSPNim(){
-        return sp.getString(SP_NIM,"");
+    public String getSPNip(){
+        return sp.getString(SP_NIP,"");
     }
 
-    public String getSPEmail(){
-        return sp.getString(SP_EMAIL, "");
+    public String getSpTelp(){
+        return sp.getString(SP_TELP, "");
     }
 
     public Boolean getSPSudahLogin(){

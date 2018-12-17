@@ -42,8 +42,8 @@ public class Main2Activity extends AppCompatActivity
         View headView = navigationView.getHeaderView(0);
         TextView textName = headView.findViewById(R.id.textName);
         textName.setText(sharedPrefManager.getSPNama());
-        TextView textEmail = headView.findViewById(R.id.textEmail);
-        textEmail.setText(sharedPrefManager.getSPEmail());
+        TextView textNip = headView.findViewById(R.id.textNip);
+        textNip.setText(sharedPrefManager.getSPNip());
 
 
         if (!sharedPrefManager.getSPSudahLogin()) {

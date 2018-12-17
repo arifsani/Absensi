@@ -84,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
                                     // Jika login berhasil maka data nama yang ada di response API
                                     // akan diparsing ke activity selanjutnya.
                                     Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
-                                    String name = jsonRESULTS.getJSONObject("user").getString("name");
-                                    String nim = jsonRESULTS.getJSONObject("user").getString("nim");
-                                    String email = jsonRESULTS.getJSONObject("user").getString("email");
-                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NIM,nim);
+                                    String name = jsonRESULTS.getJSONObject("data").getString("nama_dosen");
+                                    String nip = jsonRESULTS.getJSONObject("data").getString("nip");
+                                    String telp = jsonRESULTS.getJSONObject("data").getString("no_telp");
+                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NIP,nip);
                                     sharedPrefManager.saveSPString(SharedPrefManager.SP_NAMA,name);
-                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_EMAIL,email);
+                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_TELP,telp);
                                     // Shared Pref ini berfungsi untuk menjadi trigger session login
                                     sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
                                     startActivity(new Intent(mContext, Main2Activity.class)
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                     finish();
                                 } else {
                                     // Jika login gagal
-                                    String error_message = jsonRESULTS.getString("error_msg");
+                                    String error_message = new String("Login Gagal");
                                     Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
